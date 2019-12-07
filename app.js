@@ -53,6 +53,30 @@ app.get('/addpost1', (req, res) => {
   })
 })
 
+// insert post 2
+app.get('/addpost2', (req, res) => {
+  let post = {
+    title: 'Post Two',
+    body: 'This is post number Two'
+  }
+  let sql = 'INSERT INTO posts SET ?'
+  let query = db.query(sql, post, (err, result) => {
+    if (err) throw err
+    console.log(result)
+    res.send('post Two added')
+  })
+})
+
+// Select records
+app.get('/getposts', (req, res) => {
+  let sql = 'SELECT * FROM posts'
+  let query = db.query(sql, (err, result) => {
+    if (err) throw err
+    console.log(result)
+    res.send(result)
+  })
+})
+
 app.listen('3000', () => {
   console.log('server started on port 3000')
 })
